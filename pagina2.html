@@ -24,6 +24,32 @@
         <path d="M10 20 L25 35 L40 20" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round""")/>>
     </svg>
 </a>
+
+    <!-- Collegamento a Pagina 3 Copy in basso a destra -->
+    <div id="corner-link-box">
+        <a href="pagina-nascosta.html" title="Vai alla scatola interattiva">
+            <img src="assets/tools/boccaccio.jpg" alt="Boccaccio" style="width:48px; height:48px; border: 2px solid #fff; background: #222; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.25);">
+        </a>
+    </div>
+    <style>
+        #corner-link-box {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 99999;
+            display: block;
+        }
+        #corner-link-box img {
+            width: 48px;
+            height: 48px;
+            opacity: 0.95;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        #corner-link-box:hover img {
+            opacity: 1;
+            transform: scale(1.12);
+        }
+    </style>
     <main class="gallery-wall-container">
         <div class="gallery-wall">
             <!-- Esempio Pannello 1 (Ripetere per 7) -->
@@ -124,9 +150,6 @@
 
 
         </div>
-
-
-  
 
     <script src="script.js"></script>
 </body>
