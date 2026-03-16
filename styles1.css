@@ -1,0 +1,665 @@
+/* ==========================================================================
+   1. RESET, VARIABILI E CONFIGURAZIONE DI BASE
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+:root {
+    --header-height: 90px;
+    --gold-museum: #8b7355;
+    --gold-bright: #b8a77a;
+    --paper-bg: #d0c8b8;
+    --text-dark: #2c2416;
+    --text-light: #f0e6d2;
+    --blue-retro: #b6d6f6;
+    --transition-standard: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-flip: 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+html, body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Blocca lo scroll per mantenere l'immersione */
+    font-family: 'Georgia', serif;
+    background: #6b5d52;
+    color: var(--text-dark);
+}
+
+/* Scrollbar personalizzata per le zone di testo (Modale) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--gold-museum);
+    border-radius: 10px;
+}
+
+/* ==========================================================================
+   2. HEADER E INTERFACCIA (Z-INDEX: 3000)
+   ========================================================================== */
+header {
+    height: var(--header-height);
+    background: rgba(40, 35, 30, 0.95);
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3000; /* Sopra i quadri in hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+    font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: none;
+}
+
+.language-selector {
+    position: absolute;
+    right: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.language-selector select {
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--text-light);
+    border: 1px solid rgba(240, 230, 210, 0.3);
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#audio-toggle {
+    margin-left: 15px;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#audio-toggle:hover { transform: scale(1.1); }
+/* 2.5 INDEX */
+.ocean-video-bg {
+    position: absolute;
+    top: var(--header-height);
+    left: 5%;
+    width: 90vw;
+    height: calc(100vh - var(--header-height));
+    object-fit: cover;
+    opacity: 0.9; /* Leggera trasparenza per non disturbare la lettura */
+}
+.window-overlay {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - var(--header-height));
+    background: url('assets/parete-finestra.png') no-repeat center center;
+    background-size: 100% 100%; 
+    z-index: 1; 
+}
+/* ==========================================================================
+   3. LA STANZA (PARETE E PAVIMENTO)
+   ========================================================================== */
+   
+.pagina1.gallery-page {
+    background: url('assets/parete-sinistra.png') no-repeat center center;
+    background-size: 100% 100% !important;
+}
+.pagina2.gallery-page {
+    background: url('assets/parete-destra.png') no-repeat center center;
+    background-size: 100% 100% !important;
+}
+    .gallery-page {
+    height: 100vh;
+    background: url('assets/parete-frontale.png') no-repeat center center;
+    background-size: 100% 100% !important; /* Mantiene la prospettiva fissa */
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--header-height);
+}
+
+.gallery-wall-container {
+    flex: 1;
+    display: flex;
+    align-items: first baseline; 
+    justify-content: center;
+    padding-bottom: 5vh; /* Alza i quadri dal pavimento */
+    position: relative;
+    z-index: 10;
+
+}
+
+.gallery-wall {
+    display: flex;
+    gap: clamp(5px, 1vw, 35px);
+    align-items: flex-start;
+    perspective: 2000px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 15px;
+}
+
+/* ==========================================================================
+   4. I SETTE PANNELLI (VERTICALI, HOVER E FLIP)
+   ========================================================================== */
+.painting-unit {
+    display: flex;
+    flex-direction: column;
+    width: clamp(130px, 10vw, 200px);
+}
+
+.painting-frame {
+    width: 100%;
+    aspect-ratio: 3 / 4.4; /* Slanciato come da immagine */
+    position: relative;
+    cursor: pointer;
+    transform-origin: center bottom;
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: 20;
+}
+
+/* EFFETTO HOVER: Ingrandimento e Titolo (Z-INDEX: 2500) */
+.painting-frame:hover {
+    transform: scale(1.4) translateY(+60px) !important;
+    z-index: 2500 !important; /* Salta sopra gli altri ma sotto l'header */
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform var(--transition-flip);
+}
+
+.painting-frame.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border: 5px solid #e3e1e1;
+    border-radius:1%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.card-front { background: #fff; z-index: 2; }
+
+/* SFUMATURA NERA E TITOLO ALL'HOVER */
+.painting-hover-title {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.82);
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    line-height: 1.3;
+    pointer-events: none;
+}
+
+.painting-frame:hover .painting-hover-title {
+    opacity: 1;
+    font-size: 1.2rem;
+    background: rgba(0,0,0,0.92);
+    transition: opacity 0.3s, font-size 0.3s;
+}
+
+/* RETRO DEL QUADRO */
+.card-back {
+    transform: rotateY(180deg);
+    background: var(--blue-retro);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem;
+    text-align: center;
+    z-index: 1;
+}
+
+.card-back h3 { font-size: 1rem; margin-bottom: 0.5rem; color: #1a1410; }
+.card-back p { font-size: 0.8rem; line-height: 1.3; }
+
+/* DIDASCALIA A DESTRA SOTTO IL QUADRO */
+.museum-label {
+    width: 35px;
+    height: 18px;
+    background: #f5f0e8;
+    margin-top: 15px;
+    align-self: flex-end; /* SPOSTA A DESTRA */
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+    border: 1px solid #d0c8b8;
+    z-index: 5;
+}
+
+/* PULSANTE FLIP */
+.flip-btn {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    background: rgba(245, 240, 232, 0.9);
+    border: 1px solid var(--gold-museum);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.painting-frame:hover .flip-btn { opacity: 1; }
+
+/* ==========================================================================
+   5. NAVIGAZIONE TRA LE PAGINE (Z-INDEX: 4000)
+   ========================================================================== */
+.nav-arrow {
+    position: fixed;
+    z-index: 4000; /* SEMPRE SOPRA TUTTO */
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.4);
+    pointer-events: auto !important;
+}
+
+.nav-arrow:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* Posizionamento chirurgico */
+.nav-arrow-left { 
+    left: 30px; 
+    top: 55%; 
+    transform: translateY(-50%); 
+}
+.nav-arrow-right { 
+    right: 30px; 
+    top: 55%; 
+    transform: translateY(-50%); 
+}
+.nav-arrow-down { 
+    bottom: 30px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+}
+
+.nav-arrow svg {
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+}
+
+
+
+/* --- ELEMENTI INTERNI: Forza la cliccabilità --- */
+.modal-container, .thumb, .raccordo-cartiglio, .modal-close {
+    pointer-events: auto !important;
+}
+
+/* --- IL MURO: Trasparente ai click per lasciar passare le frecce --- */
+.gallery-wall-container {
+    pointer-events: none; 
+    z-index: 10;
+}
+.painting-frame, .museum-label {
+    pointer-events: auto; /* I quadri invece devono essere cliccabili */
+}
+/* ==========================================================================
+   6. MODALE (SISTEMA COMPLETO - Z-INDEX: 5000)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - var(--header-height));
+    background: rgba(0, 0, 0, 0.88);
+    z-index: 5000;
+    display: none; /* Attivato da JS */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centra il contenuto nel resto dello schermo */
+    pointer-events: auto !important;
+}
+
+/* Barra superiore con miniature e X */
+.modal-top-bar {
+    width: 90%;
+    max-width: 1300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.modal-thumbnails {
+    display: flex;
+    gap: 12px;
+    flex: 1;
+    justify-content: center;
+}
+
+.thumb {
+    width: 45px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.thumb:hover { background: rgba(255, 255, 255, 0.6); transform: scaleY(1.5); }
+.thumb.active { background: var(--text-light); height: 10px; }
+
+/* TOOLTIP MINIATURA (TITOLO NERO) */
+.thumb::after {
+    content: attr(data-title);
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #f5f3f3;
+    color: #010000;
+    padding: 8px 15px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5);
+}
+
+.thumb:hover::after { opacity: 1; }
+
+.modal-close {
+    font-size: 3.5rem;
+    color: var(--text-light);
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    margin-left: 25px;
+    transition: transform 0.2s;
+}
+
+.modal-close:hover { transform: scale(1.2); color: #fff; }
+
+/* CONTENITORE DETTAGLI OPERA */
+.modal-container {
+    background: var(--paper-bg) url('assets/paper-texture.jpg') center/cover;
+    width: 90vw;
+    max-width: 1400px;
+    height: clamp(450px, 70vh, 850px); 
+    border: 10px solid var(--gold-museum);
+    position: relative;
+    padding: clamp(20px, 3vw, 50px); /* Padding fluido */
+    overflow: hidden;
+    box-shadow: 0 0 70px rgba(0,0,0,0.9);
+}
+
+.painting-detail {
+    display: flex;
+    gap: 50px;
+    height: 100%;
+    align-items: flex-start;
+}
+
+.modal-img {
+    max-width: 45%;
+    max-height: 100%;
+    object-fit: contain;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.modal-text-area {
+    flex: 1;
+    overflow-y: auto;
+    height: 100%;
+    padding-right: 30px;
+    color: var(--text-dark);
+}
+
+.modal-text-area h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #1a1410;
+    border-bottom: 2px solid var(--gold-museum);
+    padding-bottom: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.modal-text-area p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+/* ==========================================================================
+   7. IL CARTIGLIO (ANIMAZIONE E POSIZIONAMENTO)
+   ========================================================================== */
+.raccordo-cartiglio {
+    position: absolute;
+    bottom: 35px;
+    right: 40px;
+    background: #fdf6e3;
+    border: 1px solid #c8b8a0;
+    padding: 1.5rem;
+    max-width: 380px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    z-index: 100;
+    transition: transform 0.3s;
+}
+
+.raccordo-cartiglio:hover { transform: translateY(-5px); }
+
+.raccordo-testo {
+    display: none; /* Attivato da JS */
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-top: 15px;
+    color: #3a2f22;
+    border-top: 1px solid #e8dcc4;
+    padding-top: 10px;
+}
+
+.fade-in-word {
+    opacity: 0;
+    display: inline-block;
+    transition: opacity 0.3s ease;
+}
+
+.fade-in-word.visible {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   8. RESPONSIVE E OTTIMIZZAZIONE SCHERMI GRANDI (2K/4K)
+   ========================================================================== */
+
+/* ===========================
+   SCHERMI GRANDI (1920px+)
+   =========================== */
+@media (min-width: 1920px) {
+
+    /* Scala generale */
+    html { font-size: 18px; }
+
+    /* Cursore grande */
+    html, body {
+        cursor: url('public/cursor-big.svg') 12 12, auto;
+    }
+
+    /* Gallery più larga */
+    .gallery-wall {
+        height: calc(100vh - var(--header-height));
+        gap: 50px;              /* più aria tra i quadri */
+        padding-left: 200px;    /* +200px per lato */
+        padding-right: 200px;
+        padding-top: var(--header-height);
+
+    }
+
+    /* Quadri più grandi */
+    .painting-unit {
+        width: 260px;
+    }
+
+    /* Modale */
+    .modal-container {
+        height: 78vh;
+    }
+
+    /* Hover quadro */
+    .painting-frame:hover {
+        transform: scale(1.6) translateY(+90px) !important;
+        z-index: 3000 !important;
+        transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .painting-frame:hover .painting-hover-title {
+        opacity: 1;
+        font-size: 1.4rem;
+        background: rgba(0,0,0,0.92);
+        transition: opacity 0.3s, font-size 0.3s;
+    }
+
+}
+
+/* ===========================
+   SCHERMI ENORMI (2500px+)
+   =========================== */
+@media (min-width: 2500px) {
+
+    /* Scala generale */
+    html { font-size: 22px; }
+
+    /* Cursore ancora più grande */
+    html, body {
+        cursor: url('public/cursor-big.svg') 16 16, auto;
+    }
+
+    /* Gallery ancora più larga */
+    .gallery-wall {
+        height: calc(100vh - var(--header-height));
+        gap: 70px;
+        padding-left: 200px;
+        padding-right: 200px;
+    }
+
+    /* Quadri ancora più grandi */
+    .painting-unit {
+        width: 320px;
+    }
+
+    /* Modale */
+    .modal-container {
+        max-width: 1700px;
+    }
+
+    /* Hover quadro */
+    .painting-frame:hover {
+        transform: scale(1.8) translateY(+180px) !important;
+    }
+
+    .painting-frame:hover .painting-hover-title {
+        font-size: 1.6rem;
+    }
+
+}
+
+/* ===========================
+   FIX PER SCHERMI BASSI
+   =========================== */
+@media (min-height: 400px) and (max-height: 800px) {
+        :root {
+        --header-height: 60px;
+    }
+    header { height: 60px; }
+    .gallery-page { padding-top: var(--header-height); }
+    .modal-container { padding: 18px; height: 85vh; max-width: 98vw; }
+    .painting-unit { width: clamp(90px, 18vw, 140px); }
+    .gallery-wall {
+        gap: clamp(5px, 1vw, 18px);
+        padding-left: 10px;
+        padding-right: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .raccordo-cartiglio { padding: 0.7rem; bottom: 10px; max-width: 220px; }
+    .modal-text-area h2 { font-size: 1.1rem; }
+    .nav-arrow { padding: 7px; }
+    .window-overlay {
+        top: var(--header-height);
+        height: calc(100vh - var(--header-height));
+    }
+}
+
+@media (max-height: 850px) {
+    .modal-container {
+        height: 80vh;
+        padding: 22px;
+        max-width: 98vw;
+    }
+    .modal-top-bar {
+        margin-bottom: 7px;
+    }
+    .modal-text-area h2 {
+        font-size: 1.2rem;
+    }
+}
+@media (max-width: 600px) {
+       :root {
+        --header-height: 48px;
+    }
+    header { height: 48px; font-size: 1rem; }
+    .gallery-page { padding-top: 48px; }
+    .gallery-wall { gap: 4px; padding-left: 2px; padding-right: 2px; }
+    .painting-unit { width: 90px; }
+    .modal-container { padding: 8px; height: 90vh; max-width: 100vw; border-width: 4px; }
+    .raccordo-cartiglio { padding: 0.4rem; bottom: 4px; max-width: 120px; font-size: 0.8rem; }
+    .modal-text-area h2 { font-size: 1rem; }
+    .nav-arrow { padding: 4px; }
+}

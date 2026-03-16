@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finestra sul Mare</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1 data-i18n="header.title">Tanti nomi, un solo mare</h1>
+        <div class="language-selector">
+            <select id="language-select" aria-label="Seleziona lingua">
+                <option value="ita">ITA</option>
+                <option value="eng">ENG</option>
+                <option value="cz">CZ</option>
+            </select>
+            <button id="audio-toggle" aria-label="Attiva/Disattiva audio" style="margin-left: 12px; background: none; border: none; color: #f0e6d2; font-size: 1.5rem; cursor: pointer; vertical-align: middle;">
+                <span id="audio-icon">🔊</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="wall">            
+            <video class="ocean-video-bg" autoplay loop muted playsinline>
+                <source src="assets/waves.mp4" type="video/mp4">
+                Il tuo browser non supporta il video.
+            </video>
+            <div class="window-frame">
+                <div class="window-overlay"></div>
+                <audio id="ocean-audio" loop>
+                    <source src="assets/ocean-waves.mp3" type="audio/mpeg">
+                    Il tuo browser non supporta l'audio.
+                </audio>
+            </div>
+        </div> 
+               <!-- Frecce di navigazione -->
+                <a href="pagina1.html" class="nav-arrow nav-arrow-left" aria-label="Sinistra">
+                    <svg width="50" height="50" viewBox="0 0 50 50">
+                        <path d="M30 10 L15 25 L30 40" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                    <a href="pagina3.html" class="nav-arrow nav-arrow-down" aria-label="Di fronte">
+                    <svg width="50" height="50" viewBox="0 0 50 50">
+                        <path d="M10 20 L25 35 L40 20" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <a href="pagina2.html" class="nav-arrow nav-arrow-right" aria-label="Destra">
+                    <svg width="50" height="50" viewBox="0 0 50 50">
+                        <path d="M20 10 L35 25 L20 40" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+    </main>
+
+    <script src="i18n.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

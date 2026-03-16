@@ -1,0 +1,631 @@
+/* =========================================
+   1. RESET E CONFIGURAZIONE BASE 
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --header-height: 90px;
+    --gold-museum: #8b7355;
+    --paper-bg: #d0c8b8;
+    --text-dark: #2c2416;
+    --ivory: #f0e6d2;
+}
+
+html, body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Impedisce scroll molesti */
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #8b7355 0%, #6b5d52 100%);
+}
+
+/* =========================================
+   2. HEADER E SELETTORI (AUDIO/LINGUA)
+   ========================================= */
+header {
+    height: var(--header-height);
+    background: rgba(40, 35, 30, 0.92);
+    color: var(--ivory);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    width: 100%;
+}
+
+header h1 {
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-align: center;
+    max-width: 70%;
+}
+
+.language-selector {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.language-selector select {
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--ivory);
+    border: 1px solid rgba(240, 230, 210, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Garamond', serif;
+}
+
+.language-selector select:hover {
+    background: rgba(0, 0, 0, 0.7);
+    border-color: rgba(240, 230, 210, 0.5);
+}
+
+#audio-toggle {
+    margin-left: 12px;
+    background: none;
+    border: none;
+    color: var(--ivory);
+    font-size: 1.5rem;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: transform 0.2s;
+}
+
+#audio-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* =========================================
+   3. LA STANZA (PARETE E PAVIMENTO)
+   ========================================= */
+.gallery-page {
+    height: 100vh;
+    /* Immagine integrale che include muro e pavimento */
+    background: url('assets/parete-sinistra.png') no-repeat center center;
+    background-size: 100% 100%; 
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container che centra la fila di quadri sulla parete bianca */
+.gallery-wall-container {
+    flex: 1;
+    display: flex;
+    align-items: flex-start; 
+    justify-content: center;
+    padding-top: 15vh; /* Regola questo valore per centrare i quadri sul bianco della parete */
+    position: relative;
+    z-index: 10;
+}
+/* =========================================
+   4. LA GALLERIA (I 7 PANNELLI A MURO) 
+   ========================================= */
+.gallery-wall {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start; /* Allinea i quadri sulla stessa linea alta */
+    gap: clamp(10px, 1.8vw, 30px); /* Spazio fluido tra i pannelli */
+    width: 100%;
+    padding: 0 4vw;
+}
+
+.gallery-wall {
+        perspective: 2000px; /* Aumenta la profondità per schermi grandi */
+        overflow: visible;   /* Fondamentale: permette al quadro di uscire dai bordi */
+}
+
+
+/* UNITA' QUADRO + ETICHETTA */
+.painting-unit {
+    display: flex;
+    flex-direction: column;
+    width: clamp(120px, 10vw, 180px); /* Larghezza proporzionale */
+    perspective: 1200px;
+    position: relative;
+}
+
+.painting-unit {
+    position: relative;
+    overflow: visible;   /* Non tagliare l'hover */
+}
+
+
+/* =========================================
+   IL FRAME (STATO NORMALE)
+   ========================================= */
+.painting-frame {
+    width: 100%;
+    aspect-ratio: 3 / 4.4; /* Slanciato e verticale */
+    position: relative;
+    cursor: pointer;
+    /* QUI NON DEVE ESSERCI SCALE! Il quadro deve partire normale */
+    z-index: 10; 
+    transform-origin: center bottom;
+    will-change: transform;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s;
+}
+
+/* =========================================
+   EFFETTO HOVER (INGRANDIMENTO)
+   ========================================= */
+.painting-frame:hover {
+    /* Ora l'ingrandimento avviene SOLO quando passi il mouse */
+    transform: scale(1.4) translateY(-15px) !important; 
+    z-index: 999 !important; /* Salta davanti a tutto su schermi 2K/4K */
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Assicurati che l'etichetta non venga ingrandita col quadro */
+.painting-unit:hover .museum-label {
+    transform: none !important;
+}
+
+/* =========================================
+   SFUMATURA NERA (Appare solo in hover)
+   ========================================= */
+.painting-hover-title {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.85); /* Sfondo nero profondo */
+    color: #f0e6d2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Nascosto di base */
+    transition: opacity 0.3s ease;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: clamp(0.7rem, 0.8vw, 1rem);
+    pointer-events: none; /* Non blocca il click sul quadro */
+}
+
+.painting-frame:hover .painting-hover-title {
+    opacity: 1; /* Appare in hover */
+}
+
+
+/* LOGICA FLIP 3D */
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.painting-frame.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border: 1px solid #ccc;
+    background: #fff;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 
+                inset 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* RETRO DEL QUADRO (AZZURRO) */
+.card-back {
+    transform: rotateY(180deg);
+    background: #b6d6f6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    text-align: center;
+    color: #2c2416;
+}
+
+.card-back h3 { font-size: 0.9rem; margin-bottom: 5px; }
+.card-back p { font-size: 0.75rem; line-height: 1.2; }
+
+/* IMMAGINE E TITOLO HOVER */
+.painting {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.painting img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.painting-hover-title {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.82); /* Sfumatura nera */
+    color: #f0e6d2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 1.2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    pointer-events: none;
+    line-height: 1.3;
+}
+
+.painting-frame:hover .painting-hover-title {
+    opacity: 1;
+}
+
+/* =========================================
+   5. ETICHETTA MUSEO (DESTRA SOTTO) 
+   ========================================= */
+.museum-label {
+    width: 30px;
+    height: 14px;
+    background: #f5f0e8;
+    margin-top: 15px; /* Distanza dal quadro */
+    align-self: flex-end; /* SPOSTA A DESTRA SOTTO IL QUADRO */
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+    border: 1px solid #d0c8b8;
+    z-index: 5;
+}
+
+.museum-label {
+    pointer-events: none;
+}
+
+/* PULSANTE FLIP (Sulla card-front) */
+.flip-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 24px;
+    height: 24px;
+    background: rgba(245, 240, 232, 0.8);
+    border: 1px solid #b8a77a;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.painting-frame:hover .flip-btn {
+    opacity: 1;
+}
+/* =========================================
+   6. NAVIGAZIONE (FRECCE DI PAGINA) 
+   ========================================= */
+/* --- RESET E BASE --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body, html { height: 100vh; width: 100vw; overflow: hidden; font-family: 'Georgia', serif; }
+
+/* HEADER SEMPRE VISIBILE */
+header {
+    height: 80px; background: rgba(40, 35, 30, 0.95); color: #f0e6d2;
+    display: flex; align-items: center; justify-content: center; z-index: 1000; position: relative;
+}
+
+/* SFONDO STANZA - USA 100% 100% PER MANTENERE LA PROSPETTIVA DELLA FOTO */
+.gallery-page {
+    height: 100vh;
+    background: url('assets/parete-sinistra.png') no-repeat center center;
+    background-size: 100% 100% !important; 
+    display: flex;
+    flex-direction: column;
+}
+
+/* MURO DEI QUADRI - CENTRATO E CLICCABILE */
+.gallery-wall-container {
+    flex: 1;
+    display: flex;
+    align-items: flex-start; 
+    justify-content: center;
+    /* Riduciamo da 18vh a 10vh per rialzarli sulla parete bianca */
+    padding-top: 10vh; 
+    padding-bottom: 5vh;
+    position: relative;
+    z-index: 10;
+    overflow: visible;
+}
+
+.gallery-wall {
+    display: flex;
+    gap: clamp(10px, 1.5vw, 25px);
+    align-items: flex-start;
+    pointer-events: auto; /* Forza l'interattività */
+}
+
+/* UNITA' QUADRO + ETICHETTA */
+.painting-unit {
+    display: flex;
+    flex-direction: column;
+    width: clamp(130px, 9.5vw, 220px); /* Scalabilità per schermi 2K/4K */
+}
+
+/* PANNELLO VERTICALE */
+.painting-frame {
+    width: 100%;
+    aspect-ratio: 3 / 4.4;
+    perspective: 1200px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* --- HOVER: FUNZIONA SU OGNI SCHERMO --- */
+.painting-frame:hover {
+    transform: scale(1.4) translateY(-15px); /* Ingrandimento visibile anche a 2560px */
+    z-index: 999 !important; /* Salta davanti a tutto */
+}
+
+.card-inner {
+    position: relative;
+    width: 100%; height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.painting-frame.flipped .card-inner { transform: rotateY(180deg); }
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%; height: 100%;
+    backface-visibility: hidden;
+    border: 1px solid #ccc;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.card-back { transform: rotateY(180deg); background: #b6d6f6; display: flex; align-items: center; justify-content: center; padding: 10px; text-align: center; }
+
+/* SFUMATURA NERA E TITOLO ALL'HOVER */
+.painting-hover-title {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Nero profondo */
+    color: white;
+    opacity: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.3s ease;
+    padding: 20px; text-align: center; font-size: clamp(0.7rem, 0.8vw, 1rem);
+    pointer-events: none;
+}
+
+.painting-frame:hover .painting-hover-title {
+    opacity: 1;
+}
+
+/* ETICHETTA A DESTRA SOTTO IL QUADRO */
+.museum-label {
+    width: 30px; height: 14px;
+    background: white;
+    margin-top: 15px;
+    align-self: flex-end; /* Sposta a destra come richiesto */
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+}
+
+/* FRECCE NAVIGAZIONE (Z-INDEX MASSIMO) */
+.nav-arrow {
+    position: absolute; z-index: 1000; cursor: pointer;
+    background: rgba(0,0,0,0.2); border-radius: 50%;
+    padding: clamp(10px, 1.2vw, 20px);
+}
+.nav-arrow-left { left: 20px; top: 50%; transform: translateY(-50%); }
+.nav-arrow-right { right: 20px; top: 50%; transform: translateY(-50%); }
+
+.thumb {
+    width: 45px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s;
+}
+
+.thumb:hover { background: rgba(255,255,255,0.6); transform: scaleY(1.5); }
+.thumb.active { background: #f0e6d2; height: 10px; }
+
+/* TOOLTIP NERO */
+/* =========================================
+   7. MODALE (STRUTTURA, TOOLTIP E CENTRATURA) 
+   ========================================= */
+
+/* L'OVERLAY: Copre tutto e centra il contenuto in colonna */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    display: none; /* Diventa flex via JS */
+    flex-direction: column;
+    align-items: center;    /* Centra orizzontalmente barra e contenitore */
+    justify-content: center; /* Centra verticalmente l'intero blocco */
+}
+
+/* LA BARRA SUPERIORE (Miniature + X) */
+.modal-top-bar {
+    width: 90vw;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.modal-thumbnails {
+    display: flex;
+    gap: 12px;
+    flex: 1;
+    justify-content: center;
+}
+
+.thumb {
+    width: 45px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s;
+}
+
+.thumb:hover { background: rgba(255, 255, 255, 0.6); transform: scaleY(1.5); }
+.thumb.active { background: var(--ivory); height: 10px; }
+
+/* Tooltip nero sulle miniature */
+.thumb::after {
+    content: attr(data-title);
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000;
+    color: #fff;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+.thumb:hover::after { opacity: 1; }
+
+.modal-close {
+    font-size: 3.5rem;
+    color: var(--ivory);
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    margin-left: 20px;
+    transition: transform 0.2s;
+}
+.modal-close:hover { transform: scale(1.15); color: #fff; }
+
+/* IL CONTENITORE BEIGE (IL RETTANGOLO CENTRALE) */
+.modal-container {
+    background: var(--paper-bg) url('assets/paper-texture.jpg') center/cover;
+    width: 90vw;
+    max-width: 1300px;
+    height: 75vh;
+    border: 8px solid var(--gold-museum);
+    position: relative;
+    padding: 40px;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(0,0,0,0.9);
+}
+
+.painting-detail {
+    display: flex;
+    gap: 40px;
+    height: 100%;
+    align-items: flex-start;
+}
+
+.modal-img {
+    max-width: 45%;
+    max-height: 100%;
+    object-fit: contain;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+.modal-text-area {
+    flex: 1;
+    overflow-y: auto;
+    height: 100%;
+    padding-right: 20px;
+    color: var(--text-dark);
+}
+
+.modal-text-area h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--gold-museum);
+    padding-bottom: 0.5rem;
+}
+
+.modal-text-area p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+    text-align: justify;
+}
+
+/* =========================================
+   8. IL CARTIGLIO (BASSO A DESTRA) 
+   ========================================= */
+.raccordo-cartiglio {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    background: #fdf6e3;
+    border: 1px solid #c8b8a0;
+    padding: 1.2rem;
+    max-width: 350px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    z-index: 100;
+}
+
+.raccordo-testo {
+    display: none;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-top: 10px;
+    color: #3a2f22;
+}
+
+.fade-in-word {
+    opacity: 0;
+    display: inline-block;
+    transition: opacity 0.3s ease;
+}
+
+.fade-in-word.visible { opacity: 1; }
+
+/* =========================================
+   9. RESPONSIVE / SCHERMI GRANDI
+   ========================================= */
+@media (min-width: 1600px) {
+    .modal-container {
+        width: 75vw;  /* Ottimizzato per 2560px */
+        height: 70vh;
+    }
+}
+
+@media (min-width: 2500px) {
+    html { font-size: 22px; } /* Tutto scala per il 4K */
+    .painting-unit { width: 220px; }
+}

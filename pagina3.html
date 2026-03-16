@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles1.css">
+</head>
+<body class="pagina3 gallery-page">
+    <header><h1>Il progetto MARIS</h1></header>
+<!-- NAV ARROWS -->
+<a href="pagina2.html" class="nav-arrow nav-arrow-left" aria-label="Sinistra">
+    <svg width="40" height="40" viewBox="0 0 50 50">
+        <path d="M30 10 L15 25 L30 40" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round""")/>>
+    </svg>
+</a>
+
+<a href="pagina1.html" class="nav-arrow nav-arrow-right" aria-label="Destra">
+    <svg width="40" height="40" viewBox="0 0 50 50">
+        <path d="M20 10 L35 25 L20 40" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round""")/>>
+    </svg>
+</a>
+
+<a href="index.html" class="nav-arrow nav-arrow-down" aria-label="Sotto">
+    <svg width="40" height="40" viewBox="0 0 50 50">
+        <path d="M10 20 L25 35 L40 20" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round""")/>>
+    </svg>
+</a>
+    <main class="gallery-wall-container">
+        <div class="gallery-wall">
+            <!-- Esempio Pannello 1 (Ripetere per 7) -->
+           <div class="painting-unit">
+                <div class="painting-frame" data-index="0">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="assets/Decamerone.jpeg" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="painting-hover-title">Mappe e cartografia nel Medioevo</div>
+                            <button class="flip-btn" style="position:absolute; bottom:5px; right:5px; z-index:100; cursor:pointer;">↻</button>
+                        </div>
+                        <div class="card-back"><p>Retro Opera 1</p></div>
+                    </div>
+                </div>
+                <div class="museum-label"></div>
+            </div> 
+            <div class="painting-unit">
+                <div class="painting-frame" data-index="1">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="assets/Decamerone.jpeg" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="painting-hover-title">Mappe e cartografia nel Medioevo</div>
+                            <button class="flip-btn" style="position:absolute; bottom:5px; right:5px; z-index:100; cursor:pointer;">↻</button>
+                        </div>
+                        <div class="card-back"><p>Retro Opera 1</p></div>
+                    </div>
+                </div>
+                <div class="museum-label"></div>
+            </div>
+                        <div class="painting-unit">
+                <div class="painting-frame" data-index="2">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="assets/Decamerone.jpeg" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="painting-hover-title">Mappe e cartografia nel Medioevo</div>
+                            <button class="flip-btn" style="position:absolute; bottom:5px; right:5px; z-index:100; cursor:pointer;">↻</button>
+                        </div>
+                        <div class="card-back"><p>Retro Opera 1</p></div>
+                    </div>
+                </div>
+                <div class="museum-label"></div>
+            </div>
+                        <div class="painting-unit">
+                <div class="painting-frame" data-index="3">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="assets/Decamerone.jpeg" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="painting-hover-title">Mappe e cartografia nel Medioevo</div>
+                            <button class="flip-btn" style="position:absolute; bottom:5px; right:5px; z-index:100; cursor:pointer;">↻</button>
+                        </div>
+                        <div class="card-back"><p>Retro Opera 1</p></div>
+                    </div>
+                </div>
+                <div class="museum-label"></div>
+            </div>
+                        <div class="painting-unit">
+                <div class="painting-frame" data-index="4">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="assets/Decamerone.jpeg" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="painting-hover-title">Mappe e cartografia nel Medioevo</div>
+                            <button class="flip-btn" style="position:absolute; bottom:5px; right:5px; z-index:100; cursor:pointer;">↻</button>
+                        </div>
+                        <div class="card-back"><p>Retro Opera 1</p></div>
+                    </div>
+                </div>
+                <div class="museum-label"></div>
+            </div>
+
+    </div>
+    <!-- MODALE -->
+    <div id="painting-modal" class="modal-overlay">
+        <div class="modal-top-bar">
+            <div class="modal-thumbnails">
+                <div class="thumb active" data-index="0" data-title="Opera I"></div>
+                <div class="thumb" data-index="1" data-title="Opera II"></div>
+                <div class="thumb" data-index="2" data-title="Opera III"></div>
+                <div class="thumb" data-index="3" data-title="Opera IV"></div>
+                <div class="thumb" data-index="4" data-title="Opera V"></div>
+                <div class="thumb" data-index="5" data-title="Opera VI"></div>
+                <div class="thumb" data-index="6" data-title="Opera VII"></div>
+            </div>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-container">
+            <div id="modal-dynamic-content" class="painting-detail">
+                <img src="assets/quadro2.jpg" class="modal-img">
+                <div class="modal-text-area">
+                    <h2>La cartografia nel Medioevo</h2>
+                    <p>Nel Medioevo la cartografia non è un sapere unitario...</p>
+                    <div class="raccordo-cartiglio" onclick="this.classList.toggle('attivo')">
+                        Approfondimento &rarr;
+                        <div class="raccordo-testo">In questo orizzonte culturale la mappa...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="script.js"></script>
+</body>
+</html>

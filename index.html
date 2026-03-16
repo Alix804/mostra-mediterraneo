@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finestra sul Mare - Home</title>
+    <link rel="stylesheet" href="styles1.css">
+</head>
+<body>
+    <header>
+        <h1 data-i18n="header.title">Tanti nomi, un solo mare</h1>
+        <div class="language-selector">
+            <select id="language-select">
+                <option value="ita">ITA</option>
+                <option value="eng">ENG</option>
+                <option value="cz">CZ</option>
+            </select>
+            <button id="audio-toggle" style="margin-left:15px; background:none; border:none; cursor:pointer; font-size:1.5rem;">🔊</button>
+        </div>
+    </header>
+
+    <main class="wall">
+        <video class="ocean-video-bg" autoplay loop muted playsinline>
+            <source src="assets/waves.mp4" type="video/mp4">
+        </video>
+        <div class="window-overlay"></div>
+        <audio id="ocean-audio" loop src="assets/ocean-waves.mp3">Il tuo browser non supporta l'audio.
+</audio>
+
+        <a href="pagina1.html" class="nav-arrow nav-arrow-left">
+            <svg width="40" height="40" viewBox="0 0 50 50"><path d="M30 10 L15 25 L30 40" stroke="white" stroke-width="3" fill="none"/></svg>
+        </a>
+        <a href="pagina3.html" class="nav-arrow nav-arrow-down">
+            <svg width="40" height="40" viewBox="0 0 50 50"><path d="M10 20 L25 35 L40 20" stroke="white" stroke-width="3" fill="none"/></svg>
+        </a>
+        <a href="pagina2.html" class="nav-arrow nav-arrow-right">
+            <svg width="40" height="40" viewBox="0 0 50 50"><path d="M20 10 L35 25 L20 40" stroke="white" stroke-width="3" fill="none"/></svg>
+        </a>
+    </main>
+
+    <script src="i18n.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
