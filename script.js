@@ -13,6 +13,59 @@ const opere = [
 
 let currentIndex = 0;
 
+
+/* Logica di audio */
+document.addEventListener('DOMContentLoaded', function() {
+    const oceanAudio = document.getElementById('ocean-audio');
+    const audioToggle = document.getElementById('audio-toggle');
+    const audioIcon = document.getElementById('audio-icon');
+    let audioEnabled = false;
+
+
+    function updateAudioIcon() {
+        if (!audioIcon) return;
+        if (audioEnabled) {
+            audioIcon.textContent = '🔇'; // Audio acceso, mostra icona barrata per "stacca"
+        } else {
+            audioIcon.textContent = '🔊'; // Audio spento, mostra icona normale
+        }
+    }
+
+    function toggleAudio() {
+        if (!oceanAudio) return;
+        if (audioEnabled) {
+            oceanAudio.pause();
+            oceanAudio.currentTime = 0;
+            audioEnabled = false;
+            updateAudioIcon();
+        } else {
+            const playPromise = oceanAudio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    audioEnabled = true;
+                    updateAudioIcon();
+                }).catch(err => {
+                    // Autoplay policy: l'utente deve interagire
+                    audioEnabled = false;
+                    updateAudioIcon();
+                    alert('Impossibile avviare l\'audio: interagisci con la pagina.');
+                });
+            } else {
+                // Fallback: se playPromise non è una promise
+                audioEnabled = true;
+                updateAudioIcon();
+            }
+        }
+    }
+
+    if (audioToggle && oceanAudio) {
+        audioToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleAudio();
+        });
+        updateAudioIcon();
+    }
+});
 /* =========================================
    2. LOGICA QUADRI (Flip e Apertura Modale)
    ========================================= */
@@ -31,13 +84,12 @@ document.querySelectorAll('.painting-frame').forEach(frame => {
         frame.classList.remove('flipped');
     });
 
-    // Apertura Modale
-    frame.addEventListener('click', () => {
-        if (!frame.classList.contains('flipped')) {
-            const idx = frame.getAttribute('data-index');
-            openModal(idx);
-        }
-    });
+// Apertura Modale (sia fronte che retro, ma non sulla flip-btn)
+frame.addEventListener('click', (e) => {
+    if (e.target.classList.contains('flip-btn')) return;
+    const idx = frame.getAttribute('data-index');
+    openModal(idx);
+});
 });
 
 /* =========================================
