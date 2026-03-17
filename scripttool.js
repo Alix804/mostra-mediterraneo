@@ -5,14 +5,17 @@ const boxTrigger = document.getElementById('box-trigger');
 
 // Lista oggetti disponibili con immagini
 const objects = [
-    { label: 'Letto', img: 'assets/tools/letto.png', width: 480, height: 320 },    // proporzione 3:2
-    { label: 'Sedia', img: 'assets/tools/sedia.png', width: 400, height: 400 },   // proporzione 5:7
-    { label: 'Tavolo', img: 'assets/tools/tavolo.png', width: 660, height: 420 },  // proporzione 11:7
-    { label: 'Finestra', img: 'assets/tools/finbocc.png', width: 500, height: 300 },
-    { label: 'Libreria', img: 'assets/tools/libreria.png', width: 500, height: 300 },
-    { label: 'Tappeto', img: 'assets/tools/tappeto.png', width: 500, height: 300 },
-    { label: 'Brocca', img: 'assets/tools/brocca.png', width: 500, height: 300 }
- 
+    { label: 'Letto', img: 'assets/tools/letto.png', width:350, height: 175 },
+    { label: 'Sedia', img: 'assets/tools/sedia.png', width: 140, height: 200, zIndex: 2000 },
+    { label: 'Tavolo', img: 'assets/tools/tavolo.png', width: 300, height: 150 },
+    { label: 'Libreria', img: 'assets/tools/libreria.png', width: 250, height: 225 },
+    //{ label: 'Tappeto', img: 'assets/tools/tappeto.png', width: 800, height: 400 },
+    { label: 'Brocca', img: 'assets/tools/brocca.png', width: 80, height: 100, zIndex: 2000 },
+    { label: 'Libro', img: 'assets/tools/libro.png', width: 120, height: 80, zIndex: 2000 },
+    { label: 'Pergamene', img: 'assets/tools/pergamene.png', width: 100, height: 60, zIndex: 2000 },
+    { label: 'Calamaio', img: 'assets/tools/calamaio.png', width: 60, height: 100, zIndex: 2000 },
+    { label: 'Candela', img: 'assets/tools/candela.png', width: 60, height: 100, zIndex: 2000 },
+    { label: 'Lanterna', img: 'assets/tools/lanterna.png', width: 100, height: 150, zIndex: 2000 }
 ];
 let remaining = [...objects];
 
@@ -31,10 +34,27 @@ function enableDrag(item) {
     let moveHandler, upHandler;
 
     item.addEventListener('click', function(e) {
+        // Calcola coordinate relative all'immagine
+        const img = item.querySelector('img');
+        if (!img) return;
+        const rect = img.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        // Definisci rettangolo centrale (50% larghezza, 60% altezza, centrato)
+        const centerW = rect.width * 0.5;
+        const centerH = rect.height * 0.6;
+        const startX = (rect.width - centerW) / 2;
+        const startY = (rect.height - centerH) / 2;
+        if (x < startX || x > startX + centerW || y < startY || y > startY + centerH) {
+            // Click fuori dal rettangolo centrale: ignora
+            return;
+        }
         if (!isMoving) {
             // Primo click: inizia movimento
             isMoving = true;
-            item.style.zIndex = 1000;
+            // Se l'oggetto ha zIndex alto, lo mantiene, altrimenti lo porta in primo piano temporaneamente
+            const oggettoPiccolo = item.style.zIndex && Number(item.style.zIndex) >= 2000;
+            if (!oggettoPiccolo) item.style.zIndex = 1500;
             offsetX = e.offsetX;
             offsetY = e.offsetY;
             // Attiva movimento col mouse
@@ -51,7 +71,9 @@ function enableDrag(item) {
         } else {
             // Secondo click: termina movimento
             isMoving = false;
-            item.style.zIndex = '';
+            // Se l'oggetto ha zIndex alto, lo mantiene, altrimenti lo riporta a default
+            const oggettoPiccolo = item.style.zIndex && Number(item.style.zIndex) >= 2000;
+            if (!oggettoPiccolo) item.style.zIndex = '';
             document.removeEventListener('mousemove', moveHandler);
         }
     });
@@ -66,6 +88,10 @@ boxTrigger.addEventListener('click', function() {
     div.style.position = 'absolute';
     div.style.cursor = 'grab';
     div.title = obj.label;
+    // Z-index personalizzato se presente nell'oggetto
+    if (obj.zIndex) {
+        div.style.zIndex = obj.zIndex;
+    }
     // Inserisci immagine
     const img = document.createElement('img');
     img.src = obj.img;

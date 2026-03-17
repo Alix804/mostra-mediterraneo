@@ -1,7 +1,21 @@
+.root, :root {
+    --header-height: 90px;
+}
 /* Aumenta la dimensione degli oggetti e delle immagini */
 .tool-item img {
     display: block;
     margin: 0 auto;
+}
+.box-image {
+    height: 30vh;
+    width: auto;
+    max-width: 22vw;
+    max-height: 30vh;
+    object-fit: contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
 }
 .tool-item div {
     font-size: 1.2rem !important;
@@ -31,7 +45,8 @@ header h1 {
     color:white;
 }
   body {
-            margin: 0;
+    position: relative;    
+    margin: 0;
             padding: 0;
             width: 100vw;
             height: 100vh;
@@ -40,17 +55,19 @@ header h1 {
             background-size: cover;
             overflow: hidden;
         }
-        #play-area {
-            position: relative;
+#play-area {
+            position: absolute;
+            top: var(--header-height);
+            left: 0;
+            height: calc(100vh - var(--header-height));
             width: 100vw;
-            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        #box-trigger {
-    width: auto;
-    height: auto;
+#box-trigger {
+    width: 30px;
+    height: 20px;
     background: none;
     border-radius: 0;
     display: flex;
@@ -58,13 +75,12 @@ header h1 {
     justify-content: center;
     cursor: pointer;
     box-shadow: none;
-    font-size: 4rem;
+    font-size: 1rem;
     z-index: 100;
     position: fixed;
-    right: 32px;
-    bottom: 32px;
+    right: 15vw;
+    bottom: 10vh;
     padding: 0;
-    margin: 0;
     transition: transform 0.1s;
 }
 #box-trigger:hover {
