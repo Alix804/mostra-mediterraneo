@@ -1,3 +1,10 @@
+// Porta animata e redirect (bloccata)
+function openDoorAndRedirect(url) {
+    // Animazione disattivata temporaneamente
+    // const door = document.querySelector('.door');
+    // if (door) door.classList.add('open');
+    window.location.href = url;
+}
 /* =========================================
    1. DATI DELLE OPERE (Array Completo)
    ========================================= */
@@ -169,3 +176,14 @@ document.querySelectorAll('.thumb').forEach((thumb, i) => {
         showPainting(i);
     });
 });
+
+// Porta che si apre per accedere alla pagina nascosta
+function openDoorAndRedirect(url) {
+  const door = document.querySelector('.door');
+  door.classList.add('open'); // Avvia l'animazione
+
+  // Aspetta 1.5 secondi (la durata del CSS transition) prima di cambiare pagina
+  setTimeout(() => {
+    window.location.href = url;
+  }, 1500);
+}
