@@ -150,7 +150,7 @@ function showPainting(index) {
                 <h2>${opere[currentIndex].titolo}</h2>
                 <p>${opere[currentIndex].desc}</p>
                 <div class="raccordo-cartiglio" onclick="startCartiglio(this)">
-                    Approfondimento &rarr;
+                    &rarr;
                     <div class="raccordo-testo" data-fulltext="${opere[currentIndex].raccordo}"></div>
                 </div>
             </div>
