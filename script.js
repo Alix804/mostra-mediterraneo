@@ -122,15 +122,18 @@ function showPainting(index) {
         t.classList.toggle('active', i === currentIndex);
     });
 
-    // Inietta il contenuto dell'opera corrente
+    // Inietta il contenuto dell'opera corrente con nuova struttura
     content.innerHTML = `
-        <img src="${opere[currentIndex].img}" class="modal-img">
-        <div class="modal-text-area">
-            <h2>${opere[currentIndex].titolo}</h2>
-            <p>${opere[currentIndex].desc}</p>
-            <div class="raccordo-cartiglio" onclick="startCartiglio(this)">
-                Approfondimento &rarr;
-                <div class="raccordo-testo" data-fulltext="${opere[currentIndex].raccordo}"></div>
+        <div class="painting-detail">
+            <img src="${opere[currentIndex].img}" class="modal-img">
+            <div class="modal-text-area">
+                <div class="modal-title-global">${opere[currentIndex].titolo}</div>
+                <h2>${opere[currentIndex].titolo}</h2>
+                <p>${opere[currentIndex].desc}</p>
+                <div class="raccordo-cartiglio" onclick="startCartiglio(this)">
+                    Approfondimento &rarr;
+                    <div class="raccordo-testo" data-fulltext="${opere[currentIndex].raccordo}"></div>
+                </div>
             </div>
         </div>
     `;
