@@ -4,16 +4,35 @@
 const opere = [
     {
     titolo: "Rappresentare il mondo: mappe e cartografia nel Medioevo",
-    img: "assets/Decamerone.jpeg",
-    desc: `Nel Medioevo la cartografia non è un sapere unitario, ma un insieme di forme diverse di rappresentazione dello spazio, ciascuna con funzioni specifiche. Accanto ai mappamondi simbolici convivono infatti carte pragmatiche, pensate per la navigazione, e rappresentazioni più complesse capaci di integrare coste, territori interni e assetti politici.
-Tra i modelli più diffusi si trova il mappamondo di tipo T O, in cui il mondo abitato appare come un disco circondato dall’oceano e i tre continenti sono separati dal Mediterraneo e dai grandi fiumi orientali. Non si tratta di una carta costruita per orientarsi nello spazio, ma di uno schema che rende visibile l’ordine generale del mondo e ne fissa nella memoria la struttura.
-Accanto a questa tradizione si sviluppano tra Duecento e Trecento le carte nautiche, strumenti destinati alla navigazione commerciale. In esse l’attenzione si concentra sulla precisione delle coste, dei porti, delle rotte e dei pericoli del mare. Il Mediterraneo vi appare come uno spazio fitto di approdi e di collegamenti, intensamente percorso da uomini, merci e informazioni.
+    img: "assets/pannelli/mappamondot.o..jpg",
+    desc: ` Nel Medioevo la cartografia non è un sapere unitario, ma un insieme di forme diverse di rappresentazione dello spazio, ciascuna con funzioni specifiche. Accanto ai mappamondi simbolici convivono infatti carte pragmatiche, pensate per la navigazione, e rappresentazioni più complesse capaci di integrare coste, territori interni e assetti politici.<br>
+Tra i modelli più diffusi si trova il mappamondo di tipo T O, in cui il mondo abitato appare come un disco circondato dall’oceano e i tre continenti sono separati dal Mediterraneo e dai grandi fiumi orientali. Non si tratta di una carta costruita per orientarsi nello spazio, ma di uno schema che rende visibile l’ordine generale del mondo e ne fissa nella memoria la struttura.<br>
+Accanto a questa tradizione si sviluppano tra Duecento e Trecento le carte nautiche, strumenti destinati alla navigazione commerciale. In esse l’attenzione si concentra sulla precisione delle coste, dei porti, delle rotte e dei pericoli del mare. Il Mediterraneo vi appare come uno spazio fitto di approdi e di collegamenti, intensamente percorso da uomini, merci e informazioni.<br>
 Le mappe medievali non servono dunque soltanto a localizzare i luoghi. Servono anche a organizzare il sapere, a dare forma al mondo e a collocare l’esperienza umana entro una visione più ampia dello spazio e della storia.`,
     raccordo: `In questo orizzonte culturale la mappa non è solo uno strumento tecnico. Può diventare anche un mezzo per viaggiare con l’intelligenza, con la memoria e con i libri.`
 },
-    { titolo: "Mappe e cartografia nel Medioevo", img: "assets/Decamerone.jpeg", desc: "Nel Medioevo la cartografia non è un sapere unitario...", raccordo: "In questo orizzonte la mappa non è solo uno strumento tecnico." },
-    { titolo: "Petrarca e l'Itinerarium", img: "assets/quadro2.jpg", desc: "L’Itinerarium ad sepulcrum Domini di Petrarca...", raccordo: "Un viaggio spirituale attraverso i libri." },
-    { titolo: "Dante: il viaggio", img: "assets/quadro2.jpg", desc: "Nella Commedia il viaggio è destino umano...", raccordo: "Dal mondo terreno all’ordine del cosmo." },
+    {
+    titolo: "Viaggiare con i libri e con le carte: Petrarca e l’Itinerarium",
+    img: "assets/pannelli/pietrovesconte.jpg",
+    desc: ` L’<em>Itinerarium ad sepulcrum Domini nostri Yesu Cristi</em> di Francesco Petrarca si presenta come una guida per un pellegrinaggio in Terra Santa. Ma, a differenza di molti testi medievali di viaggio, non nasce da un’esperienza realmente compiuta. Petrarca aveva progettato quel pellegrinaggio, senza mai realizzarlo. Il suo testo costruisce quindi un viaggio ideale, affidato allo studio, alla memoria letteraria e alla conoscenza geografica.<br>
+Indirizzato all’amico Giovanni Mandelli, che l’autore immagina in cammino verso Gerusalemme, l’<em>Itinerarium</em> accompagna il viaggiatore lungo il percorso e trasforma il pellegrinaggio in un esercizio insieme intellettuale e spirituale. L’opera si fonda infatti su tre elementi principali: l’esperienza diretta di alcuni luoghi visitati dall’autore, il ricorso a un vastissimo patrimonio di fonti classiche e cristiane, e l’uso delle carte geografiche.<br>
+Le testimonianze conservate nei manoscritti appartenuti a Petrarca mostrano chiaramente l’importanza della cartografia nel suo lavoro. Le mappe aiutano a confrontare i nomi dei luoghi, a orientarsi tra le fonti e a immaginare percorsi lontani. In una celebre lettera del 1368 Petrarca afferma di poter viaggiare “con una brevissima carta geografica, con i libri e con l’ingegno”. Il viaggio può dunque compiersi anche senza muovere il corpo, attraverso una geografia costruita nella mente.`,
+    raccordo: `Nel Trecento, dunque, il viaggio non coincide necessariamente con lo spostamento fisico. Può diventare una forma di conoscenza, una struttura del racconto, un dispositivo capace di collegare esperienza, memoria e visione.`
+}, 
+    { titolo: "Dante: il viaggio come racconto, esperienza e destino umano", 
+        img: "assets/pannelli/framauro.jpg", 
+        desc: ` Nella <em>Commedia</em> il viaggio diventa la struttura portante del poema. Dante attraversa Inferno, Purgatorio e Paradiso, e l’intero racconto si organizza intorno a questo movimento. Ma il viaggio dantesco non si esaurisce nella dimensione narrativa: è insieme esperienza concreta, figura morale e percorso di conoscenza.<br>
+Già nel primo verso, “Nel mezzo del cammin di nostra vita”, il cammino si impone come immagine fondamentale dell’esistenza umana. La vita viene pensata come un percorso, con una direzione, una crisi, ostacoli e una meta. Accanto a questa metafora iniziale, però, la <em>Commedia</em> costruisce anche un viaggio presentato come reale nella finzione del poema: Dante insiste infatti sul fatto di compierlo con il proprio corpo, durante la settimana di Pasqua del 1300.<br>
+Su questa base si innestano altri livelli di significato. Il viaggio è apprendistato alla verità, progresso morale e spirituale, anticipazione del destino delle anime dopo la morte. È anche il percorso attraverso cui Dante costruisce la propria voce poetica e profetica. Il lessico odeporico della <em>Commedia</em> tiene insieme tutti questi piani, facendo del viaggio la forma narrativa capace di unire esperienza individuale e destino universale.`, 
+        raccordo: "Ma il viaggio dantesco non si svolge in uno spazio astratto. Attraversa invece un universo rigorosamente ordinato, fondato su una precisa geografia terrestre e cosmica." 
+    },
+    { titolo: "La geografia della Commedia: dal mondo terreno all’ordine del cosmo", 
+        img: "assets/pannelli/dante.jpg", 
+        desc: `Lo spazio della <em>Commedia</em> è costruito con straordinaria coerenza. Il viaggio di Dante attraversa l’intero universo medievale: dalla voragine infernale che si apre sotto Gerusalemme fino alla montagna del Purgatorio nell’emisfero opposto, per poi salire attraverso le sfere celesti fino all’Empireo. Si tratta di un cosmo ordinato, materiale e intelligibile, che riflette la visione aristotelica e cristiana dell’universo.<br>
+L’aldilà dantesco è dunque inseparabile dalla geografia terrestre. Gerusalemme occupa il centro simbolico del mondo, l’Inferno si apre sotto la superficie della terra, il Purgatorio sorge al suo opposto. Anche quando il poema sembra allontanarsi dal mondo dei vivi, continua a misurarsi con esso. La terra riappare nella selva iniziale e poi, in forma altissima e memorabile, nella visione del globo dal cielo delle stelle fisse, dove il mondo umano si riduce a una piccola “aiuola”.<br>
+La <em>Commedia</em> mostra inoltre una sensibilità geografica e cartografica molto precisa. Fiumi, coste, città, montagne e regioni sono evocati con rigore topografico, e in alcuni passi la scrittura sembra funzionare come una vera mappa verbale. La geografia non è quindi una semplice cornice del racconto, ma uno dei suoi principi costruttivi: uno strumento di verità, capace di dare forma visibile all’ordine morale e cosmico del poema.`, 
+        raccordo: "Dal mondo terreno all’ordine del cosmo." },
+    
     { titolo: "La geografia della Commedia", img: "assets/quadro1.jpg", desc: "Lo spazio dantesco tra realtà e simbolo...", raccordo: "Una mappa dell'anima e del creato." },
     { titolo: "L'espansione dei confini", img: "assets/quadro1.jpg", desc: "Nuove rotte e nuove scoperte nell'Umanesimo...", raccordo: "Oltre le colonne d'Ercole." },
     { titolo: "La narrazione del mare", img: "assets/quadro2.jpg", desc: "Il mare come metafora del cambiamento...", raccordo: "Acque che uniscono culture diverse." },
@@ -157,7 +176,7 @@ function startCartiglio(element) {
         if (i < words.length) {
             const span = document.createElement('span');
             span.className = 'fade-in-word';
-            span.textContent = words[i] + ' ';
+            span.textContent = words[i] + '\u00A0'; // spazio non-interrompibile
             textBox.appendChild(span);
             setTimeout(() => span.classList.add('visible'), 10);
             i++;
