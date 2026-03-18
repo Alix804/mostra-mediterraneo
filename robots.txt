@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://alix804.github.io/mostra-mediterraneo/sitemap.xml
