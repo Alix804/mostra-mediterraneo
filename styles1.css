@@ -507,6 +507,7 @@ header h1 {
     display: flex;
     align-items: flex-start;
     gap: 50px;
+    position: relative;
 }
 
 /* Forza il contenitore dell'immagine a non restringersi */
@@ -591,9 +592,8 @@ header h1 {
 /* ==========================================================================
    7. IL CARTIGLIO (ANIMAZIONE E POSIZIONAMENTO)
    ========================================================================== */
-.raccordo-cartiglio {
     position: absolute;
-    bottom: 35px;
+    bottom: 10px;
     right: 40px;
     background: rgba(253, 246, 227, 0.82);
     border: 1px solid #c8b8a0;
@@ -603,8 +603,10 @@ header h1 {
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     font-family: 'Georgia', serif;
     font-style: italic;
-    z-index: 100;
+    z-index: 9999;
     transition: transform 0.3s;
+    pointer-events: auto;
+    /* Fisso in basso a destra della modale */
 }
 
 .raccordo-cartiglio:hover { transform: translateY(-5px); }
