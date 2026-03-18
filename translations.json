@@ -1,0 +1,56 @@
+{
+  "ita": {
+    "header": {
+      "title": "Tanti nomi, un solo mare"
+    },
+    "pagina1": {
+      "title": "Cartografia e scrittura di viaggio nelle Tre Corone",
+      "panel1": "Rappresentare il mondo: mappe e cartografia nel Medioevo",
+      "panel2": "Viaggiare con i libri e con le carte: Petrarca e l’Itinerarium",
+      "panel3": "Dante: il viaggio come racconto, esperienza e destino umano"
+    },
+    "pagina2": {
+      "title": "Il mare di Boccaccio"
+    },
+    "pagina3": {
+      "title": "Il progetto MARIS",
+      "panel1": "Mappe e cartografia nel Medioevo"
+    }
+  },
+  "eng": {
+    "header": {
+      "title": "Many names, one sea"
+    },
+    "pagina1": {
+      "title": "Cartography and travel writing in the Three Crowns",
+      "panel1": "Representing the world: maps and cartography in the Middle Ages",
+      "panel2": "Travelling with books and maps: Petrarch and the Itinerarium",
+      "panel3": "Dante: the journey as story, experience and human destiny"
+    },
+    "pagina2": {
+      "title": "Boccaccio's sea"
+    },
+    "pagina3": {
+      "title": "The MARIS project",
+      "panel1": "Maps and cartography in the Middle Ages"
+    }
+  },
+  "cz": {
+    "header": {
+      "title": "Mnoho jmen, jedno moře"
+    },
+    "pagina1": {
+      "title": "Kartografie a cestopis ve Třech korunách",
+      "panel1": "Zobrazování světa: mapy a kartografie ve středověku",
+      "panel2": "Cestování s knihami a mapami: Petrarca a Itinerarium",
+      "panel3": "Dante: cesta jako příběh, zkušenost a lidský osud"
+    },
+    "pagina2": {
+      "title": "Boccacciovo moře"
+    },
+    "pagina3": {
+      "title": "Projekt MARIS",
+      "panel1": "Mapy a kartografie ve středověku"
+    }
+  }
+}
