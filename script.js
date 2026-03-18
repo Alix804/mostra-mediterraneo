@@ -45,9 +45,16 @@ La <em>Commedia</em> mostra inoltre una sensibilità geografica e cartografica m
 let currentIndex = 0;
 
 
-/* Logica di audio */
 document.addEventListener('DOMContentLoaded', function() {
     const oceanAudio = document.getElementById('ocean-audio');
+    // Carica l'audio solo al primo click su un qualsiasi punto della pagina
+    if (oceanAudio) {
+        const enableAudio = () => {
+            oceanAudio.load();
+            document.removeEventListener('click', enableAudio);
+        };
+        document.addEventListener('click', enableAudio);
+    }
     const audioToggle = document.getElementById('audio-toggle');
     const audioIcon = document.getElementById('audio-icon');
     let audioEnabled = false;

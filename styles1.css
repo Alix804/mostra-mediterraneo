@@ -173,7 +173,7 @@ header h1 {
     left: 0;
     width: 100vw;
     height: calc(100vh - var(--header-height));
-    background: url('assets/parete-finestra.png') no-repeat center center;
+    background: url('assets/web-p/parete-finestra.webp') no-repeat center center;
     background-size: 100% 100%; 
     z-index: 1; 
 }
@@ -182,16 +182,16 @@ header h1 {
    ========================================================================== */
    
 .pagina1.gallery-page {
-    background: url('assets/parete-sinistra.png') no-repeat center center;
+    background: url('assets/web-p/parete-sinistra.webp') no-repeat center center;
     background-size: 100% 100% !important;
 }
 .pagina2.gallery-page {
-    background: url('assets/parete-destra.png') no-repeat center center;
+    background: url('assets/web-p/parete-destra.webp') no-repeat center center;
     background-size: 100% 100% !important;
 }
     .gallery-page {
     height: 100vh;
-    background: url('assets/parete-frontale.png') no-repeat center center;
+    background: url('assets/web-p/parete-frontale_1.webp') no-repeat center center;
     background-size: 100% 100% !important; /* Mantiene la prospettiva fissa */
     display: flex;
     flex-direction: column;

@@ -31,31 +31,22 @@ function applyTranslations(lang) {
     // Traduci elementi con data-i18n
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
-        // Solo se non siamo in italiano, sovrascrivi se esiste la traduzione
-        if (lang !== 'ita') {
-            const translation = getNestedTranslation(t, key);
-            if (translation) {
-                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                    element.placeholder = translation;
-                } else {
-                    element.textContent = translation;
-                }
+        const translation = getNestedTranslation(t, key);
+        if (translation) {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                element.placeholder = translation;
+            } else {
+                element.textContent = translation;
             }
-        } else {
-            // In italiano, resetta al testo originale se serve (opzionale)
         }
     });
 
     // Traduci elementi con data-i18n-html (per contenuti HTML)
     document.querySelectorAll('[data-i18n-html]').forEach(element => {
         const key = element.getAttribute('data-i18n-html');
-        if (lang !== 'ita') {
-            const translation = getNestedTranslation(t, key);
-            if (translation) {
-                element.innerHTML = translation;
-            }
-        } else {
-            // In italiano, resetta al testo originale se serve (opzionale)
+        const translation = getNestedTranslation(t, key);
+        if (translation) {
+            element.innerHTML = translation;
         }
     });
 

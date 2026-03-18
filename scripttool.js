@@ -5,17 +5,17 @@ const boxTrigger = document.getElementById('box-trigger');
 
 // Lista oggetti disponibili con immagini
 const objects = [
-    { label: 'Letto', img: 'assets/tools/letto.png', width:350, height: 175 },
-    { label: 'Sedia', img: 'assets/tools/sedia.png', width: 140, height: 200, zIndex: 2000 },
-    { label: 'Tavolo', img: 'assets/tools/tavolo.png', width: 300, height: 150 },
-    { label: 'Libreria', img: 'assets/tools/libreria.png', width: 250, height: 225 },
+    { label: 'Letto', img: 'assets/tools/letto.png', width:350, height: 175, loading: 'lazy', decoding: 'async' },
+    { label: 'Sedia', img: 'assets/tools/sedia.png', width: 140, height: 200, zIndex: 2000, loading: 'lazy', decoding: 'async' },
+    { label: 'Tavolo', img: 'assets/tools/tavolo.png', width: 300, height: 150, loading: 'lazy', decoding: 'async' },
+    { label: 'Libreria', img: 'assets/tools/libreria.png', width: 250, height: 225, loading: 'lazy', decoding: 'async' },
     //{ label: 'Tappeto', img: 'assets/tools/tappeto.png', width: 800, height: 400 },
-    { label: 'Brocca', img: 'assets/tools/brocca.png', width: 80, height: 100, zIndex: 2000 },
-    { label: 'Libro', img: 'assets/tools/libro.png', width: 120, height: 80, zIndex: 2000 },
-    { label: 'Pergamene', img: 'assets/tools/pergamene.png', width: 100, height: 60, zIndex: 2000 },
-    { label: 'Calamaio', img: 'assets/tools/calamaio.png', width: 60, height: 100, zIndex: 2000 },
-    { label: 'Candela', img: 'assets/tools/candela.png', width: 60, height: 100, zIndex: 2000 },
-    { label: 'Lanterna', img: 'assets/tools/lanterna.png', width: 100, height: 150, zIndex: 2000 }
+    { label: 'Brocca', img: 'assets/tools/brocca.png', width: 80, height: 100, zIndex: 2000, loading: 'lazy', decoding: 'async' },
+    { label: 'Libro', img: 'assets/tools/libro.png', width: 120, height: 80, zIndex: 2000, loading: 'lazy', decoding: 'async' },
+    { label: 'Pergamene', img: 'assets/tools/pergamene.png', width: 100, height: 60, zIndex: 2000, loading: 'lazy', decoding: 'async' },
+    { label: 'Calamaio', img: 'assets/tools/calamaio.png', width: 60, height: 100, zIndex: 2000, loading: 'lazy', decoding: 'async' },
+    { label: 'Candela', img: 'assets/tools/candela.png', width: 60, height: 100, zIndex: 2000, loading: 'lazy', decoding: 'async' },
+    { label: 'Lanterna', img: 'assets/tools/lanterna.png', width: 100, height: 150, zIndex: 2000, loading: 'lazy', decoding: 'async' }
 ];
 let remaining = [...objects];
 
