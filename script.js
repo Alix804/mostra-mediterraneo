@@ -168,23 +168,28 @@ function showPainting(index) {
     });
 
     // Inietta il contenuto dell'opera corrente con nuova struttura
-content.innerHTML = `
-    <div class="painting-detail">
-        <div class="img-container">
-            <img src="${opere[currentIndex].img}" class="modal-img">
-            <div class="modal-credit-vertical">${opere[currentIndex].fonte}</div>
+    let extraLink = '';
+    if (currentIndex === 2) {
+            extraLink = `<div style="margin-top:18px;"><a href=\"https://alix804.github.io/mari-boccaccio/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color:inherit;text-decoration:underline dotted #8b7355; font-weight:bold;\">Vai a MedSea &rarr;</a></div>`;
+    }
+    content.innerHTML = `
+        <div class="painting-detail">
+            <div class="img-container">
+                <img src="${opere[currentIndex].img}" class="modal-img">
+                <div class="modal-credit-vertical">${opere[currentIndex].fonte}</div>
+            </div>
+            <div class="modal-text-area">
+                <div class="modal-title-global">${opere[currentIndex].titolo}</div>
+                <h2>${opere[currentIndex].titolo}</h2>
+                <p>${opere[currentIndex].desc}</p>
+                ${extraLink}
+            </div>
         </div>
-        <div class="modal-text-area">
-            <div class="modal-title-global">${opere[currentIndex].titolo}</div>
-            <h2>${opere[currentIndex].titolo}</h2>
-            <p>${opere[currentIndex].desc}</p>
+        <div class="raccordo-cartiglio" onclick="startCartiglio(this)">
+            &rarr;
+            <div class="raccordo-testo" data-fulltext="${opere[currentIndex].raccordo}"></div>
         </div>
-    </div>
-    <div class="raccordo-cartiglio" onclick="startCartiglio(this)">
-        &rarr;
-        <div class="raccordo-testo" data-fulltext="${opere[currentIndex].raccordo}"></div>
-    </div>
-`;
+    `;
 }
 
 /* =========================================
