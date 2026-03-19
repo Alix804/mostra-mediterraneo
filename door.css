@@ -1,57 +1,27 @@
-/* Porta animata e container - SOLO per pagina3.html */
-.door-container {
-    perspective: 1000px;
+
+/* Porta statica: posizione e dimensione fisse, MAI responsive, MAI ridimensionata */
+.door-img-container {
+    position: fixed;
+    left: 24px !important;
+    bottom: 48px !important;
+    width: 350px !important;
+    height: 600px !important;
+    min-width: 350px !important;
+    max-width: 350px !important;
+    min-height: 600px !important;
+    max-height: 600px !important;
+    z-index: 1;
+    pointer-events: auto;
+}
+#porta {
+    width: 350px !important;
+    height: 600px !important;
+    min-width: 350px !important;
+    max-width: 350px !important;
+    min-height: 600px !important;
+    max-height: 600px !important;
     cursor: pointer;
-    width: 200px;
-    height: 400px;
+    display: block;
+    object-fit: contain;
     pointer-events: auto;
-    z-index: 2100;
-    position: absolute;
-    left: 6vw;
-    bottom: 14%;
-    top: auto;
-}
-
-.door-frame {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.door {
-    width: 100%;
-    height: 100%;
-    pointer-events: auto;
-    background-image: url('assets/web-p/porta_1.webp');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: right;
-    transition: transform 1.5s ease-in-out;
-    transform-origin: left;
-    position: relative;
-    z-index: 2;
-}
-
-.door.open {
-  transform: rotateY(-110deg);
-}
-
-/* Responsive porta */
-@media (max-width: 900px) {
-    .door-container {
-        width: 200px;
-        height: 400px;
-    }
-}
-@media (max-width: 600px) {
-    .door-container {
-        width: 80px;
-        height: 160px;
-    }
-}
-@media (min-width: 1920px) {
-    .door-container {
-        pointer-events: auto;
-        z-index: 2100;
-    }
 }

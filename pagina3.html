@@ -25,23 +25,32 @@
         <path d="M10 20 L25 35 L40 20" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round""")/>>
     </svg>
 </a>
+    <!-- Porta per accedere alla pagina nascosta -->
+    <div class="door-img-container">
+        <img id="porta" src="assets/porta-chiusa.png" alt="Porta" />
+    </div>
     <main class="gallery-wall-container">
-        <!-- Porta per accedere alla pagina nascosta -->
-        <div class="door-container" onclick="openDoorAndRedirect('pagina-nascosta.html')">
-            <div class="door-frame">
-                <div class="door">
-                    <div class="door-handle"></div>
-                </div>
-            </div>
-        </div>
-        <div class="gallery-wall">
-            <!-- Esempio Pannello 1 (Ripetere per 7) -->
+        <script>
+        let aperta = false;
+        const porta = document.getElementById('porta');
+        porta.addEventListener('click', function () {
+            aperta = !aperta;
+            porta.src = aperta ? 'assets/porta-aperta.png' : 'assets/porta-chiusa.png';
+            if (aperta) {
+                setTimeout(function() {
+                    window.location.href = 'pagina-nascosta.html';
+                }, 1200); // 1.2 secondi
+            }
+        });
+        </script>
+        <div class="gallery-wall" style="margin: 0 auto;">
+            <!-- 5 pannelli -->
            <div class="painting-unit">
                 <div class="painting-frame" data-index="0">
                     <div class="card-inner">
                         <div class="card-front">
-                            <img src="assets/Decamerone.jpeg" style="width:100%; height:100%; object-fit:cover;">
-                            <div class="painting-hover-title" data-i18n="pagina3.panel1">Mappe e cartografia nel Medioevo</div>
+                            <img src="assets/pannelli/copertine/maris1.jpg" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="painting-hover-title">Visione e Identità</div>
                             <button class="flip-btn" style="position:absolute; bottom:5px; right:5px; z-index:100; cursor:pointer;">↻</button>
                         </div>
                         <div class="card-back"><p>Retro Opera 1</p></div>
@@ -54,11 +63,11 @@
                 <div class="painting-frame" data-index="1">
                     <div class="card-inner">
                         <div class="card-front">
-                            <img src="assets/Decamerone.jpeg" style="width:100%; height:100%; object-fit:cover;">
-                            <div class="painting-hover-title">Mappe e cartografia nel Medioevo</div>
+                            <img src="assets/pannelli/copertine/maris2.jpg" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="painting-hover-title">Parole e Mappe</div>
                             <button class="flip-btn" style="position:absolute; bottom:5px; right:5px; z-index:100; cursor:pointer;">↻</button>
                         </div>
-                        <div class="card-back"><p>Retro Opera 1</p></div>
+                        <div class="card-back"><p>Retro Opera 2</p></div>
                     </div>
                     <div class="painting-credit-vertical">[crediti o fonte]</div>
                 </div>
@@ -68,11 +77,11 @@
                 <div class="painting-frame" data-index="2">
                     <div class="card-inner">
                         <div class="card-front">
-                            <img src="assets/Decamerone.jpeg" style="width:100%; height:100%; object-fit:cover;">
-                            <div class="painting-hover-title">Mappe e cartografia nel Medioevo</div>
+                            <img src="assets/pannelli/copertine/maris5.png" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="painting-hover-title">Strumenti Digitali</div>
                             <button class="flip-btn" style="position:absolute; bottom:5px; right:5px; z-index:100; cursor:pointer;">↻</button>
                         </div>
-                        <div class="card-back"><p>Retro Opera 1</p></div>
+                        <div class="card-back"><p>Retro Opera 3</p></div>
                     </div>
                     <div class="painting-credit-vertical">[crediti o fonte]</div>
                 </div>
@@ -82,11 +91,11 @@
                 <div class="painting-frame" data-index="3">
                     <div class="card-inner">
                         <div class="card-front">
-                            <img src="assets/Decamerone.jpeg" style="width:100%; height:100%; object-fit:cover;">
-                            <div class="painting-hover-title">Mappe e cartografia nel Medioevo</div>
+                            <img src="assets/pannelli/copertine/maris4.png" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="painting-hover-title">Impatto e Società</div>
                             <button class="flip-btn" style="position:absolute; bottom:5px; right:5px; z-index:100; cursor:pointer;">↻</button>
                         </div>
-                        <div class="card-back"><p>Retro Opera 1</p></div>
+                        <div class="card-back"><p>Retro Opera 4</p></div>
                     </div>
                     <div class="painting-credit-vertical">[crediti o fonte]</div>
                 </div>
@@ -96,11 +105,11 @@
                 <div class="painting-frame" data-index="4">
                     <div class="card-inner">
                         <div class="card-front">
-                            <img src="assets/Decamerone.jpeg" style="width:100%; height:100%; object-fit:cover;">
-                            <div class="painting-hover-title">Mappe e cartografia nel Medioevo</div>
+                            <img src="assets/pannelli/copertine/maris3.jpeg" style="width:100%; height:100%; object-fit:cover;">
+                            <div class="painting-hover-title">Crediti e Partner</div>
                             <button class="flip-btn" style="position:absolute; bottom:5px; right:5px; z-index:100; cursor:pointer;">↻</button>
                         </div>
-                        <div class="card-back"><p>Retro Opera 1</p></div>
+                        <div class="card-back"><p>Retro Opera 5</p></div>
                     </div>
                     <div class="painting-credit-vertical">[crediti o fonte]</div>
                 </div>
