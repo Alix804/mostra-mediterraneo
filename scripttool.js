@@ -5,7 +5,7 @@ const boxTrigger = document.getElementById('box-trigger');
 
 // Lista oggetti disponibili con immagini
 const objects = [
-    { label: 'Letto', img: 'assets/tools/letto.png', width:350, height: 175, loading: 'lazy', decoding: 'async' },
+    { label: 'Letto', img: 'assets/tools/letto.png', width:400, height: 300, loading: 'lazy', decoding: 'async' },
     { label: 'Sedia', img: 'assets/tools/sedia.png', width: 140, height: 200, zIndex: 2000, loading: 'lazy', decoding: 'async' },
     { label: 'Tavolo', img: 'assets/tools/tavolo.png', width: 300, height: 150, loading: 'lazy', decoding: 'async' },
     { label: 'Libreria', img: 'assets/tools/libreria.png', width: 250, height: 225, loading: 'lazy', decoding: 'async' },
@@ -15,7 +15,8 @@ const objects = [
     { label: 'Pergamene', img: 'assets/tools/pergamene.png', width: 100, height: 60, zIndex: 2000, loading: 'lazy', decoding: 'async' },
     { label: 'Calamaio', img: 'assets/tools/calamaio.png', width: 60, height: 100, zIndex: 2000, loading: 'lazy', decoding: 'async' },
     { label: 'Candela', img: 'assets/tools/candela.png', width: 60, height: 100, zIndex: 2000, loading: 'lazy', decoding: 'async' },
-    { label: 'Lanterna', img: 'assets/tools/lanterna.png', width: 100, height: 150, zIndex: 2000, loading: 'lazy', decoding: 'async' }
+    { label: 'Lanterna', img: 'assets/tools/lanterna.png', width: 100, height: 150, zIndex: 2000, loading: 'lazy', decoding: 'async' },
+    { label: 'Mitico', img: 'assets/tools/mitico.png', width: 200, height: 400, zIndex: 2100, loading: 'lazy', decoding: 'async' }
 ];
 let remaining = [...objects];
 
@@ -40,9 +41,9 @@ function enableDrag(item) {
         const rect = img.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        // Definisci rettangolo centrale (50% larghezza, 60% altezza, centrato)
-        const centerW = rect.width * 0.5;
-        const centerH = rect.height * 0.6;
+        // Definisci rettangolo centrale (70% larghezza, 80% altezza, centrato)
+        const centerW = rect.width * 0.7;
+        const centerH = rect.height * 0.8;
         const startX = (rect.width - centerW) / 2;
         const startY = (rect.height - centerH) / 2;
         if (x < startX || x > startX + centerW || y < startY || y > startY + centerH) {
@@ -81,7 +82,20 @@ function enableDrag(item) {
 
 boxTrigger.addEventListener('click', function() {
     if (remaining.length === 0) return;
-    const idx = Math.floor(Math.random() * remaining.length);
+    // Se rimane solo mitico, estrai quello, altrimenti escludilo dal random
+    let idx;
+    if (remaining.length === 1 && remaining[0].label === 'Mitico') {
+        idx = 0;
+    } else {
+        // Cerca mitico
+        const miticoIdx = remaining.findIndex(o => o.label === 'Mitico');
+        // Escludi mitico dal random finché non è l'ultimo
+        const pool = remaining.filter(o => o.label !== 'Mitico');
+        idx = Math.floor(Math.random() * pool.length);
+        // Trova l'indice reale nell'array remaining
+        const realIdx = remaining.indexOf(pool[idx]);
+        idx = realIdx;
+    }
     const obj = remaining.splice(idx, 1)[0];
     const div = document.createElement('div');
     div.className = 'tool-item';

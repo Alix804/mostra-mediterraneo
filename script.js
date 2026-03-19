@@ -151,11 +151,13 @@ frame.addEventListener('click', (e) => {
    ========================================= */
 function openModal(index) {
     document.getElementById('painting-modal').style.display = 'flex';
+    document.body.classList.add('modal-open');
     showPainting(index);
 }
 
 function closeModal() {
     document.getElementById('painting-modal').style.display = 'none';
+    document.body.classList.remove('modal-open');
 }
 
 function showPainting(index) {
@@ -169,8 +171,9 @@ function showPainting(index) {
 
     // Inietta il contenuto dell'opera corrente con nuova struttura
     let extraLink = '';
-    if (currentIndex === 2) {
-            extraLink = `<div style="margin-top:18px;"><a href=\"https://alix804.github.io/mari-boccaccio/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color:inherit;text-decoration:underline dotted #8b7355; font-weight:bold;\">Vai a MedSea &rarr;</a></div>`;
+    const isPagina3 = document.body && document.body.classList.contains('pagina3');
+    if (isPagina3 && currentIndex === 2) {
+        extraLink = `<div style="margin-top:18px;"><a href=\"https://alix804.github.io/mari-boccaccio/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color:inherit;text-decoration:underline dotted #8b7355; font-weight:bold;\">Vai a MedSea &rarr;</a></div>`;
     }
     content.innerHTML = `
         <div class="painting-detail">
@@ -225,7 +228,7 @@ function startCartiglio(element) {
                 }
             }, 1800);
         }
-    }, 150);
+    }, 300);
 }
 
 // Click sulle miniature della barra superiore
